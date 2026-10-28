@@ -484,7 +484,7 @@
             </button>
             <button onclick="resetAllPasswordsToNis()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition flex items-center gap-2">
               <i class="fa-solid fa-rotate-left"></i>
-              <span>Reset Semua ke NIS</span>
+              <span>Reset ke Tgl Lahir (ddmmyyyy)</span>
             </button>
             <button onclick="backToLogin()" class="px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs sm:text-sm font-bold transition">
               Tutup Panel
@@ -506,7 +506,7 @@
           </div>
           <div class="text-xs text-slate-500">
             <i class="fa-solid fa-key text-amber-500 mr-1"></i>
-            Murid dapat login menggunakan <strong>Password Utama (NIS)</strong>, <strong>NISN</strong>, atau <strong>Password Kustom</strong> yang Bapak atur di bawah.
+            Murid dapat login menggunakan <strong>Password Kustom Tanggal Lahir (ddmmyyyy)</strong>, <strong>NIS</strong>, atau <strong>NISN</strong>.
           </div>
         </div>
 
@@ -517,9 +517,9 @@
               <tr class="bg-slate-100 text-slate-600 text-xs uppercase border-b border-slate-200">
                 <th class="py-3 px-3 w-10 text-center rounded-tl-xl">No</th>
                 <th class="py-3 px-4">Nama Murid</th>
-                <th class="py-3 px-3 text-center">NIS (Password 1)</th>
-                <th class="py-3 px-3 text-center">NISN (Password 2)</th>
-                <th class="py-3 px-4">Password Kustom</th>
+                <th class="py-3 px-3 text-center">Tanggal Lahir</th>
+                <th class="py-3 px-3 text-center">NIS / NISN</th>
+                <th class="py-3 px-4">Password Kustom (ddmmyyyy)</th>
                 <th class="py-3 px-3 text-center">Rata-rata</th>
                 <th class="py-3 px-4 text-right rounded-tr-xl">Aksi Cepat</th>
               </tr>
@@ -653,6 +653,8 @@
         name: "Aaron Kenzie Fairuz",
         nis: "2968",
         nisn: "3167937699",
+        birthDateText: "22 Jun 2016",
+        dobPwd: "22062016",
         scores: [55, 100, 87, 75, 80, 75, 84, 72, 57, 100],
         ekskul: [],
         sakit: 3, izin: 2, alfa: 0,
@@ -663,6 +665,8 @@
         name: "Achmad Syukri Wahid",
         nis: "2969",
         nisn: "0156649656",
+        birthDateText: "06 Jun 2015",
+        dobPwd: "06062015",
         scores: [75, 97, 60, 80, 92, 75, 89, 72, 77, 90],
         ekskul: [],
         sakit: 10, izin: 2, alfa: 0,
@@ -673,6 +677,8 @@
         name: "Adeeva Ramazani",
         nis: "3192",
         nisn: "3163221355",
+        birthDateText: "16 Jun 2016",
+        dobPwd: "16062016",
         scores: [60, 100, 61, 85, 96, 86, 83, 72, 77, 85],
         ekskul: [],
         sakit: 3, izin: 2, alfa: 0,
@@ -683,6 +689,8 @@
         name: "Adrian Pradipta Padli",
         nis: "2970",
         nisn: "3156086259",
+        birthDateText: "12 Jul 2015",
+        dobPwd: "12072015",
         scores: [45, 80, 57, 55, 64, 75, 72, 76, 70, 77],
         ekskul: [],
         sakit: 2, izin: 2, alfa: 0,
@@ -693,6 +701,8 @@
         name: "Anastasya Michelle Panjaitan",
         nis: "2971",
         nisn: "3159740775",
+        birthDateText: "17 Jun 2015",
+        dobPwd: "17062015",
         scores: [86, 87, 67, 65, 84, 86, 77, 84, 73, 83],
         customTopics: {
           0: "memahami karya Allah dalam kehidupan keluarga, sekolah, dan masyarakat.."
@@ -706,6 +716,8 @@
         name: "Andhara Keisha Azzahra",
         nis: "2972",
         nisn: "3158087122",
+        birthDateText: "31 Jul 2015",
+        dobPwd: "31072015",
         scores: [60, 77, 27, 80, 48, 73, 52, 60, 80, 97],
         ekskul: [],
         sakit: 0, izin: 2, alfa: 0,
@@ -716,6 +728,8 @@
         name: "Anindita Putri Suci Anggraeni",
         nis: "2973",
         nisn: "0138435615",
+        birthDateText: "05 Nov 2015",
+        dobPwd: "05112015",
         scores: [70, 93, 93, 80, 88, 88, 71, 64, 83, 80],
         ekskul: [],
         sakit: 0, izin: 0, alfa: 0,
@@ -726,6 +740,8 @@
         name: "Anindya Aisyah Ramadhani",
         nis: "2974",
         nisn: "0155980019",
+        birthDateText: "20 Jun 2015",
+        dobPwd: "20062015",
         scores: [85, 97, 90, 75, 96, 86, 93, 96, 90, 97],
         ekskul: [],
         sakit: 4, izin: 0, alfa: 0,
@@ -736,6 +752,8 @@
         name: "Aurelia Anindya Dhewi",
         nis: "3246",
         nisn: "0153399370",
+        birthDateText: "26 Feb 2015",
+        dobPwd: "26022015",
         scores: [75, 97, 82, 75, 92, 80, 100, 60, 100, 89],
         ekskul: [],
         sakit: 16, izin: 2, alfa: 0,
@@ -746,6 +764,8 @@
         name: "Azizah Dzakiyah Talita Ma'Rifatuha Al-Asach",
         nis: "2975",
         nisn: "3159153320",
+        birthDateText: "21 Agu 2015",
+        dobPwd: "21082015",
         scores: [75, 97, 90, 80, 56, 80, 67, 76, 73, 93],
         ekskul: [],
         sakit: 0, izin: 0, alfa: 0,
@@ -756,6 +776,8 @@
         name: "Azka Pramana Prasetyo",
         nis: "2976",
         nisn: "3158209055",
+        birthDateText: "09 Sep 2015",
+        dobPwd: "09092015",
         scores: [70, 80, 81, 55, 68, 73, 79, 48, 53, 88],
         ekskul: [],
         sakit: 5, izin: 2, alfa: 0,
@@ -766,6 +788,8 @@
         name: "Dhinda Azahra",
         nis: "2977",
         nisn: "3153806299",
+        birthDateText: "22 Apr 2015",
+        dobPwd: "22042015",
         scores: [75, 83, 60, 75, 80, 80, 93, 84, 93, 87],
         ekskul: [],
         sakit: 6, izin: 0, alfa: 0,
@@ -776,6 +800,8 @@
         name: "Earlyta Keisha Az-Zahra",
         nis: "2978",
         nisn: "3159168081",
+        birthDateText: "09 Okt 2015",
+        dobPwd: "09102015",
         scores: [90, 100, 97, 95, 100, 86, 87, 96, 80, 100],
         ekskul: [
           { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" },
@@ -789,6 +815,8 @@
         name: "Excellin Aurellia Silviani",
         nis: "2979",
         nisn: "3158064776",
+        birthDateText: "01 Agu 2015",
+        dobPwd: "01082015",
         scores: [85, 93, 83, 80, 92, 80, 80, 96, 80, 100],
         ekskul: [],
         sakit: 5, izin: 4, alfa: 1,
@@ -799,6 +827,8 @@
         name: "Faza Nur Aiman",
         nis: "2980",
         nisn: "3155539007",
+        birthDateText: "09 Agu 2015",
+        dobPwd: "09082015",
         scores: [65, 80, 33, 45, 68, 70, 68, 60, 57, 67],
         ekskul: [],
         sakit: 4, izin: 3, alfa: 0,
@@ -809,6 +839,8 @@
         name: "Keysha Fatazeera",
         nis: "3247",
         nisn: "3147785931",
+        birthDateText: "04 Okt 2024",
+        dobPwd: "04102024",
         scores: [70, 73, 47, 55, 80, 86, 82, 72, 77, 93],
         ekskul: [],
         sakit: 5, izin: 2, alfa: 4,
@@ -819,6 +851,8 @@
         name: "Khairunnisa Salsabila",
         nis: "2981",
         nisn: "3151993598",
+        birthDateText: "10 Mar 2015",
+        dobPwd: "10032015",
         scores: [50, 80, 33, 40, 44, 80, 63, 36, 43, 30],
         ekskul: [],
         sakit: 1, izin: 0, alfa: 1,
@@ -829,6 +863,8 @@
         name: "Luthfia Afiqa Salsabila",
         nis: "2982",
         nisn: "3164293414",
+        birthDateText: "20 Mei 2016",
+        dobPwd: "20052016",
         scores: [70, 87, 67, 80, 88, 85, 74, 48, 80, 80],
         ekskul: [],
         sakit: 1, izin: 2, alfa: 0,
@@ -839,6 +875,8 @@
         name: "Muhammad Atala Berliandika",
         nis: "2985",
         nisn: "3151500819",
+        birthDateText: "09 Mei 2015",
+        dobPwd: "09052015",
         scores: [80, 97, 63, 65, 84, 70, 93, 32, 63, 80],
         ekskul: [
           { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
@@ -851,6 +889,8 @@
         name: "Muhammad Azjwar Aswwad",
         nis: "2984",
         nisn: "3155164903",
+        birthDateText: "13 Apr 2015",
+        dobPwd: "13042015",
         scores: [45, 57, 33, 55, 40, 75, 71, 36, 43, 53],
         ekskul: [],
         sakit: 3, izin: 1, alfa: 0,
@@ -861,6 +901,8 @@
         name: "Muhammad Iskandar Muda",
         nis: "2986",
         nisn: "3152575925",
+        birthDateText: "10 Jun 2015",
+        dobPwd: "10062015",
         scores: [90, 100, 100, 85, 100, 80, 93, 100, 93, 100],
         ekskul: [],
         sakit: 2, izin: 0, alfa: 0,
@@ -871,6 +913,8 @@
         name: "Muhammad Yasqi",
         nis: "2987",
         nisn: "3156938319",
+        birthDateText: "28 Mar 2015",
+        dobPwd: "28032015",
         scores: [80, 97, 87, 70, 88, 70, 83, 44, 87, 87],
         ekskul: [],
         sakit: 0, izin: 1, alfa: 0,
@@ -881,6 +925,8 @@
         name: "Nurul Aqila",
         nis: "2988",
         nisn: "3157192404",
+        birthDateText: "18 Okt 2015",
+        dobPwd: "18102015",
         scores: [85, 93, 73, 70, 96, 80, 89, 76, 80, 93],
         ekskul: [],
         sakit: 6, izin: 1, alfa: 0,
@@ -891,6 +937,8 @@
         name: "Pandu Djalu Wicaksono",
         nis: "2989",
         nisn: "3153856744",
+        birthDateText: "02 Nov 2015",
+        dobPwd: "02112015",
         scores: [80, 100, 90, 80, 76, 80, 87, 84, 73, 93],
         ekskul: [],
         sakit: 1, izin: 0, alfa: 0,
@@ -901,6 +949,8 @@
         name: "Reza Kurnia Bekti",
         nis: "2991",
         nisn: "3133341914",
+        birthDateText: "23 Des 2013",
+        dobPwd: "23122013",
         scores: [60, 87, 57, 60, 60, 73, 90, 24, 63, 77],
         ekskul: [],
         sakit: 6, izin: 0, alfa: 0,
@@ -911,6 +961,8 @@
         name: "Rizky Ramadhan",
         nis: "2992",
         nisn: "3157826153",
+        birthDateText: "02 Jul 2015",
+        dobPwd: "02072015",
         scores: [70, 93, 93, 75, 80, 75, 95, 80, 93, 90],
         ekskul: [],
         sakit: 4, izin: 2, alfa: 0,
@@ -921,6 +973,8 @@
         name: "Sabiq El Fathin Salim",
         nis: "2993",
         nisn: "3153729956",
+        birthDateText: "07 Jan 2015",
+        dobPwd: "07012015",
         scores: [75, 80, 50, 75, 88, 73, 93, 40, 67, 67],
         ekskul: [
           { name: "Silat", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
@@ -933,6 +987,8 @@
         name: "Sandi Rama Aditia",
         nis: "2994",
         nisn: "3157111091",
+        birthDateText: "15 Jun 2015",
+        dobPwd: "15062015",
         scores: [85, 93, 40, 65, 96, 80, 93, 60, 67, 87],
         ekskul: [
           { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
@@ -945,6 +1001,8 @@
         name: "Syauqia Aftani Anindya",
         nis: "2995",
         nisn: "3154799827",
+        birthDateText: "07 Nov 2015",
+        dobPwd: "07112015",
         scores: [80, 94, 89, 70, 100, 85, 93, 68, 80, 91],
         ekskul: [
           { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
@@ -957,6 +1015,8 @@
         name: "Tsamara Ufairah Azka",
         nis: "2996",
         nisn: "3151682194",
+        birthDateText: "16 Jul 2015",
+        dobPwd: "16072015",
         scores: [65, 90, 33, 80, 80, 80, 78, 60, 80, 70],
         ekskul: [],
         sakit: 0, izin: 0, alfa: 0,
@@ -967,6 +1027,8 @@
         name: "Zhafira Kaysha",
         nis: "2997",
         nisn: "3152485407",
+        birthDateText: "13 Okt 2015",
+        dobPwd: "13102015",
         scores: [90, 93, 67, 70, 88, 86, 88, 92, 93, 90],
         ekskul: [],
         sakit: 1, izin: 4, alfa: 0,
@@ -975,9 +1037,9 @@
     ];
 
     // ============================================================================
-    // STATE & LOCAL STORAGE UNTUK PASSWORD KUSTOM
+    // STATE & LOCAL STORAGE UNTUK PASSWORD KUSTOM (DEFAULT: TANGGAL LAHIR ddmmyyyy)
     // ============================================================================
-    const STORAGE_KEY = "sdn011_kelas5_custom_passwords_v1";
+    const STORAGE_KEY = "sdn011_kelas5_custom_passwords_v2";
     let customPasswords = {};
     let currentStudent = null;
 
@@ -1000,8 +1062,8 @@
       }
     }
 
-    function getCustomPassword(studentId, defaultNis) {
-      return customPasswords[studentId] || defaultNis;
+    function getCustomPassword(studentId, defaultDobPwd) {
+      return customPasswords[studentId] || defaultDobPwd;
     }
 
     // Fungsi penentu predikat capaian & deskripsi sesuai aturan dokumen
@@ -1106,12 +1168,13 @@
         return;
       }
 
-      const customPwd = getCustomPassword(student.id, student.nis);
+      const customPwd = getCustomPassword(student.id, student.dobPwd);
       const validPasswords = [
+        student.dobPwd.toLowerCase(),
+        customPwd.toLowerCase(),
         student.nis.toLowerCase(),
         student.nisn.toLowerCase(),
-        `${student.nis}/${student.nisn}`.toLowerCase(),
-        customPwd.toLowerCase()
+        `${student.nis}/${student.nisn}`.toLowerCase()
       ];
 
       if (validPasswords.includes(enteredPwd.toLowerCase())) {
@@ -1328,21 +1391,22 @@
       const tbody = document.getElementById("teacherStudentTableBody");
       const q = query.trim().toLowerCase();
       const filtered = STUDENTS_DATA.filter(s =>
-        s.name.toLowerCase().includes(q) || s.nis.includes(q) || s.nisn.includes(q)
+        s.name.toLowerCase().includes(q) || s.nis.includes(q) || s.nisn.includes(q) || s.dobPwd.includes(q)
       );
 
       tbody.innerHTML = filtered.map(s => {
         const avg = (s.scores.reduce((a, b) => a + b, 0) / s.scores.length).toFixed(1);
-        const customPwd = getCustomPassword(s.id, s.nis);
+        const customPwd = getCustomPassword(s.id, s.dobPwd);
         return `
           <tr class="hover:bg-slate-50 transition">
             <td class="py-3 px-3 text-center font-semibold text-slate-500">${s.id}</td>
             <td class="py-3 px-4 font-bold text-slate-800">${s.name}</td>
             <td class="py-3 px-3 text-center">
-              <span class="font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2 py-1 rounded-lg text-xs">${s.nis}</span>
+              <span class="text-xs font-medium text-slate-700">${s.birthDateText}</span>
             </td>
             <td class="py-3 px-3 text-center">
-              <span class="font-mono text-slate-600 text-xs">${s.nisn}</span>
+              <span class="font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-lg text-xs">${s.nis}</span>
+              <span class="block font-mono text-slate-500 text-[11px] mt-0.5">${s.nisn}</span>
             </td>
             <td class="py-3 px-4">
               <div class="flex items-center gap-1.5">
@@ -1350,7 +1414,7 @@
                   type="text"
                   id="pwdInput_${s.id}"
                   value="${customPwd}"
-                  class="w-28 px-2.5 py-1 text-xs font-mono border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  class="w-28 px-2.5 py-1 text-xs font-mono font-bold text-emerald-800 bg-emerald-50/60 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   onclick="saveSinglePassword(${s.id})"
@@ -1398,7 +1462,7 @@
       customPasswords = {};
       saveCustomPasswords();
       renderTeacherTable(document.getElementById("teacherSearchInput").value);
-      showToast("Semua password dikembalikan ke NIS masing-masing.");
+      showToast("Semua password kustom dikembalikan ke Tanggal Lahir (ddmmyyyy).");
     }
 
     function openStudentReportById(studentId) {
@@ -1421,8 +1485,8 @@
     function copySingleStudentWA(studentId) {
       const s = STUDENTS_DATA.find(st => st.id === studentId);
       if (!s) return;
-      const pwd = getCustomPassword(s.id, s.nis);
-      const text = `*INFORMASI AKSES E-RAPOR TENGAH SEMESTER*\n*SDN 011 Balikpapan Tengah - Kelas 5*\n\nYth. Orang Tua/Wali dari:\nNama Murid: *${s.name}*\nPassword Login: *${pwd}* (atau NISN: *${s.nisn}*)\n\nSilakan pilih nama ananda pada aplikasi dan masukkan password di atas untuk melihat Laporan Hasil Belajar Asesmen Tengah Semester Ganjil 2026/2027.\n\nTerima kasih.\n_Wali Kelas 5: Abdul Rahmat, S.Pd._`;
+      const pwd = getCustomPassword(s.id, s.dobPwd);
+      const text = `*INFORMASI AKSES E-RAPOR TENGAH SEMESTER*\n*SDN 011 Balikpapan Tengah - Kelas 5*\n\nYth. Orang Tua/Wali dari:\nNama Murid: *${s.name}*\nPassword Login: *${pwd}* (Tanggal Lahir ddmmyyyy)\n\nSilakan pilih nama ananda pada aplikasi dan masukkan password di atas untuk melihat Laporan Hasil Belajar Asesmen Tengah Semester Ganjil 2026/2027.\n\nTerima kasih.\n_Wali Kelas 5: Abdul Rahmat, S.Pd._`;
       copyTextToClipboard(text, `Pesan WA untuk ${s.name} berhasil disalin!`);
     }
 
@@ -1433,8 +1497,8 @@
         ""
       ];
       STUDENTS_DATA.forEach(s => {
-        const pwd = getCustomPassword(s.id, s.nis);
-        lines.push(`${s.id}. *${s.name}* — Password: \`${pwd}\``);
+        const pwd = getCustomPassword(s.id, s.dobPwd);
+        lines.push(`${s.id}. *${s.name}* (${s.birthDateText}) — Password: \`${pwd}\``);
       });
       copyTextToClipboard(lines.join("\n"), "Daftar login seluruh murid berhasil disalin!");
     }
