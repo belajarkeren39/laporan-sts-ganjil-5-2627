@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Rapor ASTS Kelas 5 - SDN 011 Balikpapan Tengah</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Gaya khusus untuk cetak A4 Rapor Resmi */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #officialPrintArea, #officialPrintArea * {
+        visibility: visible;
+      }
+      #officialPrintArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Top Navigation Bar -->
+  <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-30 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="backToLogin()">
+        <div class="w-11 h-11 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center border border-white/25 shadow-inner">
+          <i class="fa-solid fa-graduation-cap text-amber-300 text-xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider bg-amber-400 text-slate-900 px-2 py-0.5 rounded-md">E-Rapor ASTS</span>
+            <span class="text-xs text-blue-200 font-medium">T.P. 2026/2027 • Semester 1</span>
+          </div>
+          <h1 class="font-bold text-base sm:text-lg leading-tight mt-0.5">SD Negeri 011 Balikpapan Tengah</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="btnNavStudent" onclick="backToLogin()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 border border-white/15 transition flex items-center gap-2">
+          <i class="fa-solid fa-user-check text-amber-300"></i>
+          <span>Portal Murid</span>
+        </button>
+        <button id="btnNavTeacher" onclick="openTeacherAuthModal()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/15 transition shadow-sm flex items-center gap-2">
+          <i class="fa-solid fa-user-lock text-amber-300"></i>
+          <span>Login Wali Kelas</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- ==================== VIEW 1: LOGIN MURID ==================== -->
+    <section id="loginSection" class="max-w-xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden">
+        <!-- Banner Atas -->
+        <div class="bg-gradient-to-br from-blue-800 via-indigo-800 to-slate-900 p-6 sm:p-8 text-white relative overflow-hidden">
+          <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-white/5 rounded-full blur-xl"></div>
+          <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-amber-300 text-xs font-semibold mb-3">
+              <i class="fa-solid fa-award"></i>
+              <span>Kelas 5 (LIMA) • Wali Kelas: Abdul Rahmat, S.Pd.</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">Laporan Hasil Belajar</h2>
+            <p class="text-blue-100 text-xs sm:text-sm mt-1">Asesmen Sumatif Tengah Semester (ASTS) Ganjil 2026/2027</p>
+          </div>
+        </div>
+
+        <!-- Form Login -->
+        <div class="p-6 sm:p-8 space-y-5">
+          <!-- Kotak Info Privasi -->
+          <div class="bg-blue-50/90 border border-blue-200 rounded-2xl p-4 flex items-start gap-3">
+            <i class="fa-solid fa-shield-halved text-blue-600 text-lg mt-0.5"></i>
+            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p class="font-semibold text-blue-950">Akses Rahasia Murid & Orang Tua:</p>
+              <p class="mt-0.5">1. Pilih <strong>Nama Murid</strong> pada menu dropdown di bawah ini.</p>
+              <p>2. Masukkan <strong>Password Rahasia</strong> milik masing-masing murid untuk membuka laporan hasil belajar.</p>
+            </div>
+          </div>
+
+          <!-- Dropdown Nama Murid -->
+          <div>
+            <label for="studentSelect" class="block text-sm font-bold text-slate-700 mb-2">
+              <i class="fa-solid fa-user-graduate text-blue-600 mr-1.5"></i>1. Pilih Nama Murid
+            </label>
+
+            <div class="relative">
+              <select
+                id="studentSelect"
+                onchange="onStudentSelected()"
+                class="w-full pl-4 pr-10 py-3 text-sm sm:text-base bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition cursor-pointer appearance-none font-medium text-slate-800"
+              >
+                <!-- Populated by JS -->
+              </select>
+              <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-xs"></i>
+            </div>
+          </div>
+
+          <!-- Input Password -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="studentPassword" class="block text-sm font-bold text-slate-700">
+                <i class="fa-solid fa-lock text-blue-600 mr-1.5"></i>2. Masukkan Password
+              </label>
+            </div>
+            <div class="relative">
+              <input
+                type="password"
+                id="studentPassword"
+                placeholder="Ketik password rahasia murid..."
+                onkeydown="if(event.key === 'Enter') handleStudentLogin()"
+                class="w-full pl-4 pr-12 py-3 text-sm sm:text-base bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition font-mono"
+              />
+              <button
+                type="button"
+                onclick="togglePasswordVisibility()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-800 rounded-lg"
+                title="Tampilkan/Sembunyikan Password"
+              >
+                <i id="eyeIcon" class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pesan Error Login -->
+          <div id="loginErrorBox" class="hidden bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2.5">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-base"></i>
+            <span id="loginErrorText">Password yang dimasukkan belum sesuai.</span>
+          </div>
+
+          <!-- Tombol Masuk -->
+          <button
+            type="button"
+            onclick="handleStudentLogin()"
+            class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-700/25 hover:shadow-blue-800/40 transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Buka Laporan Hasil Belajar</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: RAPOR MURID (SETELAH LOGIN) ==================== -->
+    <section id="reportSection" class="hidden space-y-6">
+      <!-- Action Bar Atas -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-3">
+          <button onclick="backToLogin()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Ganti Murid / Keluar</span>
+          </button>
+          <span class="text-xs sm:text-sm text-slate-500 hidden sm:inline">|</span>
+          <span class="text-xs sm:text-sm font-semibold text-slate-700 hidden sm:inline" id="activeStudentTopLabel"></span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="tabBtnInteractive" onclick="switchReportMode('interactive')" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white transition flex items-center gap-1.5">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Tampilan Interaktif</span>
+          </button>
+          <button id="tabBtnOfficial" onclick="switchReportMode('official')" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Lembar Rapor Resmi (A4)</span>
+          </button>
+          <button onclick="printOfficialReport()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-print"></i>
+            <span>Cetak Rapor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 2A: TAMPILAN INTERAKTIF -->
+      <div id="interactiveReportView" class="space-y-6 no-print">
+        <!-- Kartu Profil Murid & Ringkasan Statistik -->
+        <div class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-amber-300 text-xs font-semibold">
+                <i class="fa-solid fa-school"></i>
+                <span>SDN 011 Balikpapan Tengah • Kelas 5 (LIMA)</span>
+              </div>
+              <h2 id="interactiveName" class="text-2xl sm:text-3xl font-extrabold tracking-tight">Nama Murid</h2>
+              <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs sm:text-sm text-blue-100">
+                <span><i class="fa-solid fa-id-card mr-1.5 text-amber-300"></i>NIS / NISN: <strong id="interactiveNis" class="text-white font-mono"></strong></span>
+                <span><i class="fa-solid fa-calendar-check mr-1.5 text-amber-300"></i>Tahun Pelajaran: <strong class="text-white">2026/2027 (Semester 1)</strong></span>
+              </div>
+            </div>
+
+            <!-- 4 Kotak Ringkasan Cepat -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-3.5 text-center">
+                <p class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold">Rata-Rata</p>
+                <p id="statAvg" class="text-2xl font-extrabold text-amber-300 mt-0.5">0</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-3.5 text-center">
+                <p class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold">Tertinggi</p>
+                <p id="statMax" class="text-2xl font-extrabold text-emerald-300 mt-0.5">0</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-3.5 text-center">
+                <p class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold">Tercapai</p>
+                <p id="statPassed" class="text-2xl font-extrabold text-white mt-0.5">0/10</p>
+              </div>
+              <div class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-3.5 text-center">
+                <p class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold">Total Absen</p>
+                <p id="statAbsence" class="text-2xl font-extrabold text-sky-200 mt-0.5">0 hr</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catatan Wali Kelas Highlight Card -->
+        <div class="bg-amber-50/90 border-2 border-amber-200 rounded-3xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-900 flex items-center justify-center shrink-0 shadow-sm">
+            <i class="fa-solid fa-comment-dots text-xl"></i>
+          </div>
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="font-bold text-amber-950 text-base">Catatan & Apresiasi Wali Kelas</h3>
+              <span class="text-xs bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-semibold">Bapak Abdul Rahmat, S.Pd.</span>
+            </div>
+            <p id="interactiveNote" class="text-slate-700 text-sm sm:text-base leading-relaxed italic"></p>
+          </div>
+        </div>
+
+        <!-- Visualisasi Grafik Nilai & Daftar Nilai -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-7">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-800">A. Nilai dan Capaian Kompetensi</h3>
+              <p class="text-xs text-slate-500">Rincian nilai dan deskripsi capaian pada 10 mata pelajaran Kelas 5</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">Sangat Baik (100)</span>
+              <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800">Baik (96-99)</span>
+              <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800">Cukup (85-95)</span>
+              <span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800">Perlu Pendampingan (&le;84)</span>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b-2 border-slate-200 text-xs uppercase text-slate-500 bg-slate-50/80">
+                  <th class="py-3.5 px-3 w-12 text-center rounded-tl-xl">No</th>
+                  <th class="py-3.5 px-4 min-w-[200px]">Mata Pelajaran</th>
+                  <th class="py-3.5 px-4 w-36 text-center">Nilai</th>
+                  <th class="py-3.5 px-4 w-36 text-center">Capaian</th>
+                  <th class="py-3.5 px-4 rounded-tr-xl">Deskripsi Capaian</th>
+                </tr>
+              </thead>
+              <tbody id="interactiveGradesTable" class="divide-y divide-slate-200 text-sm">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ekstrakurikuler & Ketidakhadiran Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Ekstrakurikuler -->
+          <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-6">
+            <h3 class="text-base font-extrabold text-slate-800 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-medal text-blue-600"></i>
+              <span>B. Kegiatan Ekstrakurikuler</span>
+            </h3>
+            <div id="interactiveEkskulContainer">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Ketidakhadiran -->
+          <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-6">
+            <h3 class="text-base font-extrabold text-slate-800 mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-blue-600"></i>
+              <span>C. Rekapitulasi Ketidakhadiran</span>
+            </h3>
+            <div class="grid grid-cols-3 gap-3 mt-2">
+              <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center">
+                <p class="text-xs font-bold text-amber-800 uppercase">Sakit</p>
+                <p id="interactiveSakit" class="text-2xl font-extrabold text-amber-900 mt-1">0 hari</p>
+              </div>
+              <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 text-center">
+                <p class="text-xs font-bold text-sky-800 uppercase">Izin</p>
+                <p id="interactiveIzin" class="text-2xl font-extrabold text-sky-900 mt-1">0 hari</p>
+              </div>
+              <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-center">
+                <p class="text-xs font-bold text-rose-800 uppercase">Tanpa Ket.</p>
+                <p id="interactiveAlfa" class="text-2xl font-extrabold text-rose-900 mt-1">0 hari</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-VIEW 2B: LEMBAR RAPOR RESMI A4 (UNTUK CETAK / PREVIEW DOKUMEN ASLI) -->
+      <div id="officialReportView" class="hidden">
+        <div id="officialPrintArea" class="bg-white max-w-4xl mx-auto p-6 sm:p-10 rounded-2xl shadow-xl border border-slate-300 text-slate-900">
+          <!-- Kop Surat -->
+          <div class="border-b-4 border-double border-slate-900 pb-4 mb-5 flex items-center justify-between gap-4">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 bg-blue-50 border border-blue-200 rounded-xl">
+              <i class="fa-solid fa-shield-halved text-3xl sm:text-4xl text-blue-800"></i>
+            </div>
+            <div class="text-center flex-1">
+              <p class="text-xs sm:text-sm font-bold tracking-wide uppercase">Pemerintah Kota Balikpapan</p>
+              <p class="text-xs sm:text-sm font-bold tracking-wide uppercase">Dinas Pendidikan dan Kebudayaan</p>
+              <h2 class="text-base sm:text-xl font-extrabold uppercase tracking-tight mt-0.5">Sekolah Dasar Negeri 011 Balikpapan Tengah</h2>
+              <p class="text-[11px] sm:text-xs text-slate-700 mt-0.5">Jalan Sumber Rejo I RT 35 No 13, Kel. Sumber Rejo, Kec. Balikpapan Tengah, Kode Pos 76124. Telp (0542) 418226</p>
+            </div>
+          </div>
+
+          <h3 class="text-center font-extrabold text-sm sm:text-base uppercase underline mb-5">
+            Laporan Hasil Belajar - Asesmen Tengah Semester
+          </h3>
+
+          <!-- Identitas Murid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm mb-5">
+            <table class="w-full">
+              <tr>
+                <td class="py-1 font-semibold w-32">Nama murid</td>
+                <td class="py-1 font-bold" id="printName">: -</td>
+              </tr>
+              <tr>
+                <td class="py-1 font-semibold">NIS/NISN</td>
+                <td class="py-1" id="printNis">: -</td>
+              </tr>
+              <tr>
+                <td class="py-1 font-semibold">Kelas</td>
+                <td class="py-1">: 5 (LIMA)</td>
+              </tr>
+            </table>
+            <table class="w-full">
+              <tr>
+                <td class="py-1 font-semibold w-36">Tahun Pelajaran</td>
+                <td class="py-1">: 2026/2027</td>
+              </tr>
+              <tr>
+                <td class="py-1 font-semibold">Semester</td>
+                <td class="py-1">: 1</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- A. Nilai dan Capaian Kompetensi -->
+          <p class="font-bold text-xs sm:text-sm mb-2">A. Nilai dan Capaian Kompetensi</p>
+          <table class="w-full border-collapse border border-slate-800 text-xs mb-5">
+            <thead>
+              <tr class="bg-slate-100">
+                <th class="border border-slate-800 py-2 px-2 w-10 text-center">No.</th>
+                <th class="border border-slate-800 py-2 px-3 text-left">Mata pelajaran</th>
+                <th class="border border-slate-800 py-2 px-2 w-16 text-center">Nilai</th>
+                <th class="border border-slate-800 py-2 px-2 w-24 text-center">Capaian</th>
+                <th class="border border-slate-800 py-2 px-3 text-left">Deskripsi capaian</th>
+              </tr>
+            </thead>
+            <tbody id="printGradesTable">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+
+          <!-- B. Ekstrakurikuler & C. Ketidakhadiran -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            <div>
+              <p class="font-bold text-xs sm:text-sm mb-1.5">B. Ekstrakurikuler</p>
+              <table class="w-full border-collapse border border-slate-800 text-xs">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-800 py-1.5 px-2 w-8 text-center">No.</th>
+                    <th class="border border-slate-800 py-1.5 px-2 text-left">Kegiatan ekstrakurikuler</th>
+                    <th class="border border-slate-800 py-1.5 px-2 text-center">Penilaian</th>
+                    <th class="border border-slate-800 py-1.5 px-2 text-left">Keterangan/capaian</th>
+                  </tr>
+                </thead>
+                <tbody id="printEkskulTable">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <p class="font-bold text-xs sm:text-sm mb-1.5">C. Ketidakhadiran</p>
+              <table class="w-full border-collapse border border-slate-800 text-xs">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-800 py-1.5 px-3 text-left">Keterangan</th>
+                    <th class="border border-slate-800 py-1.5 px-3 text-center w-28">Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-800 py-1.5 px-3">Sakit</td>
+                    <td class="border border-slate-800 py-1.5 px-3 text-center" id="printSakit">0 hari</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-800 py-1.5 px-3">Izin</td>
+                    <td class="border border-slate-800 py-1.5 px-3 text-center" id="printIzin">0 hari</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-800 py-1.5 px-3">Tanpa keterangan</td>
+                    <td class="border border-slate-800 py-1.5 px-3 text-center" id="printAlfa">0 hari</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- D. Catatan Wali Kelas -->
+          <p class="font-bold text-xs sm:text-sm mb-1.5">D. Catatan Wali Kelas</p>
+          <div class="border border-slate-800 p-3 text-xs leading-relaxed mb-6" id="printNote">
+            -
+          </div>
+
+          <!-- Tanda Tangan -->
+          <div class="grid grid-cols-3 gap-4 text-xs mt-8 text-center">
+            <div>
+              <p>Mengetahui,</p>
+              <p class="mb-14">Orang Tua / Wali,</p>
+              <p class="border-b border-slate-800 w-40 mx-auto"></p>
+            </div>
+            <div>
+              <p>Mengetahui,</p>
+              <p class="mb-14">Plt. Kepala Sekolah,</p>
+              <p class="font-bold underline">Agus Hermawan, S.Pd</p>
+              <p>NIP. 197106161999071001</p>
+            </div>
+            <div>
+              <p>Balikpapan, 29 Oktober 2026</p>
+              <p class="mb-14">Wali Kelas,</p>
+              <p class="font-bold underline">Abdul Rahmat, S.Pd.</p>
+              <p>NIP. 199602022022211001</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: PANEL GURU / MANAJEMEN PASSWORD ==================== -->
+    <section id="teacherSection" class="hidden space-y-6 no-print">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-5 mb-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">Mode Wali Kelas</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800 mt-1">Daftar Akun & Password Murid Kelas 5</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Wali Kelas dapat melihat, mengubah password murid, menyalin pesan WhatsApp untuk orang tua, atau langsung membuka rapor murid.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="copyAllCredentialsWA()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition flex items-center gap-2 shadow-sm">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              <span>Salin Daftar Login (Format WA)</span>
+            </button>
+            <button onclick="resetAllPasswordsToNis()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold transition flex items-center gap-2">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Reset Semua ke NIS</span>
+            </button>
+            <button onclick="backToLogin()" class="px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs sm:text-sm font-bold transition">
+              Tutup Panel
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Pencarian di Panel Guru -->
+        <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="relative max-w-md w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input
+              type="text"
+              id="teacherSearchInput"
+              oninput="renderTeacherTable(this.value)"
+              placeholder="Cari nama murid atau NIS..."
+              class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div class="text-xs text-slate-500">
+            <i class="fa-solid fa-key text-amber-500 mr-1"></i>
+            Murid dapat login menggunakan <strong>Password Utama (NIS)</strong>, <strong>NISN</strong>, atau <strong>Password Kustom</strong> yang Bapak atur di bawah.
+          </div>
+        </div>
+
+        <!-- Tabel 31 Murid -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="bg-slate-100 text-slate-600 text-xs uppercase border-b border-slate-200">
+                <th class="py-3 px-3 w-10 text-center rounded-tl-xl">No</th>
+                <th class="py-3 px-4">Nama Murid</th>
+                <th class="py-3 px-3 text-center">NIS (Password 1)</th>
+                <th class="py-3 px-3 text-center">NISN (Password 2)</th>
+                <th class="py-3 px-4">Password Kustom</th>
+                <th class="py-3 px-3 text-center">Rata-rata</th>
+                <th class="py-3 px-4 text-right rounded-tr-xl">Aksi Cepat</th>
+              </tr>
+            </thead>
+            <tbody id="teacherStudentTableBody" class="divide-y divide-slate-200">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal Autentikasi Khusus Wali Kelas -->
+  <div id="teacherAuthModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 no-print">
+    <div class="bg-white rounded-3xl max-w-md w-full flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="p-5 sm:p-6 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-user-shield text-amber-400 text-lg"></i>
+          <div>
+            <h3 class="font-bold text-base">Akses Khusus Wali Kelas</h3>
+            <p class="text-xs text-slate-300">Masukkan NIP Wali Kelas untuk membuka panel</p>
+          </div>
+        </div>
+        <button onclick="closeTeacherAuthModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <div>
+          <label for="teacherPinInput" class="block text-xs font-bold uppercase text-slate-600 mb-1.5">Password / NIP Wali Kelas</label>
+          <input
+            type="password"
+            id="teacherPinInput"
+            placeholder="Masukkan NIP Wali Kelas..."
+            onkeydown="if(event.key === 'Enter') verifyTeacherAuth()"
+            class="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+          />
+        </div>
+        <div id="teacherAuthError" class="hidden bg-rose-50 border border-rose-200 text-rose-700 px-3.5 py-2.5 rounded-xl text-xs font-medium">
+          Password Wali Kelas tidak sesuai.
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-1">
+          <button onclick="closeTeacherAuthModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+            Batal
+          </button>
+          <button onclick="verifyTeacherAuth()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition">
+            Masuk Panel Guru
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl border border-slate-700 text-xs sm:text-sm font-medium items-center gap-2.5 no-print">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <span id="toastText">Berhasil disalin!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8 text-center text-xs text-slate-500 no-print">
+    <p class="font-semibold text-slate-700">SD Negeri 011 Balikpapan Tengah • Kelas 5 (LIMA)</p>
+    <p class="mt-0.5">Laporan Hasil Belajar Asesmen Sumatif Tengah Semester (ASTS) Ganjil 2026/2027</p>
+  </footer>
+
+  <script>
+    // ============================================================================
+    // DATA MATA PELAJARAN & DESKRIPSI KOMPETENSI KELAS 5 SDN 011 BALIKPAPAN TENGAH
+    // ============================================================================
+    const SUBJECTS = [
+      {
+        no: 1,
+        name: "Pendidikan Agama dan Budi Pekerti",
+        topic: "memahami menyayangi anak yatim, asmaul husna, sikap menghargai."
+      },
+      {
+        no: 2,
+        name: "Pendidikan Pancasila",
+        topic: "Sejarah Perumusan Pancasila."
+      },
+      {
+        no: 3,
+        name: "Bahasa Indonesia",
+        topic: "ide pokok, kata sifat, sinonim antonim, majas."
+      },
+      {
+        no: 4,
+        name: "Matematika",
+        topic: "Bilangan Cacah 100.000, FPB dan KPK."
+      },
+      {
+        no: 5,
+        name: "Ilmu Pengetahuan Alam dan Sosial (IPAS)",
+        topic: "sistem pernapasan dan pencernaan."
+      },
+      {
+        no: 6,
+        name: "Seni Musik",
+        topic: "memainkan lagu dengan musik pianika."
+      },
+      {
+        no: 7,
+        name: "Pendidikan Jasmani, Olahraga, dan Kesehatan",
+        topic: "memahami cara bermain permainan bola besar (sepak bola) dan aturannya."
+      },
+      {
+        no: 8,
+        name: "Bahasa Inggris",
+        topic: "mendeskripsikan benda, keadaan dengan menggunakan kosakata bahasa Inggris sederhana."
+      },
+      {
+        no: 9,
+        name: "Koding dan Kecerdasan Artifisial",
+        topic: "memahami cara berpikir komputasional dalam kehidupan sehari-hari."
+      },
+      {
+        no: 10,
+        name: "Pendidikan Kebersihan dan Lingkungan Hidup (PKLH)",
+        topic: "sanitasi, drainase dan pengolahan sampah organik."
+      }
+    ];
+
+    // ============================================================================
+    // DATA LENGKAP 31 MURID KELAS 5 SESUAI DOKUMEN PDF
+    // ============================================================================
+    const STUDENTS_DATA = [
+      {
+        id: 1,
+        name: "Aaron Kenzie Fairuz",
+        nis: "2968",
+        nisn: "3167937699",
+        scores: [55, 100, 87, 75, 80, 75, 84, 72, 57, 100],
+        ekskul: [],
+        sakit: 3, izin: 2, alfa: 0,
+        note: "Halo Aaron! Bapak sangat bangga melihat hasil Pendidikan Pancasila dan PKLH kamu yang sempurna! Kemampuanmu di Bahasa Indonesia dan IPAS juga sudah bagus sekali. Yuk, kita tambah lagi porsi latihan untuk Matematika, Bahasa Inggris, dan Koding. Jangan ragu bertanya di kelas ya, Bapak siap membantu Aaron meraih nilai yang lebih tinggi lagi!"
+      },
+      {
+        id: 2,
+        name: "Achmad Syukri Wahid",
+        nis: "2969",
+        nisn: "0156649656",
+        scores: [75, 97, 60, 80, 92, 75, 89, 72, 77, 90],
+        ekskul: [],
+        sakit: 10, izin: 2, alfa: 0,
+        note: "Syukri, terima kasih sudah berjuang keras! Nilai IPAS, Pancasila, dan PKLH kamu sangat memuaskan. Walau kemarin sempat absen karena sakit, semangat belajarmu tidak luntur. Mari kita pelan-pelan perbaiki pemahaman di Matematika dan Bahasa Indonesia ya. Yang terpenting, selalu jaga kesehatanmu, Syukri!"
+      },
+      {
+        id: 3,
+        name: "Adeeva Ramazani",
+        nis: "3192",
+        nisn: "3163221355",
+        scores: [60, 100, 61, 85, 96, 86, 83, 72, 77, 85],
+        ekskul: [],
+        sakit: 3, izin: 2, alfa: 0,
+        note: "Hebat sekali, Adeeva! Angka 100 di Pendidikan Pancasila serta nilai tinggi di IPAS dan Matematika bukti bahwa kamu anak yang tekun. Bakat musikmu juga makin terlihat menonjol. Supaya kemampuanmu makin lengkap, yuk kita beri perhatian lebih ke Bahasa Indonesia dan Bahasa Inggris. Pertahankan senyum dan semangat belajarmu!"
+      },
+      {
+        id: 4,
+        name: "Adrian Pradipta Padli",
+        nis: "2970",
+        nisn: "3156086259",
+        scores: [45, 80, 57, 55, 64, 75, 72, 76, 70, 77],
+        ekskul: [],
+        sakit: 2, izin: 2, alfa: 0,
+        note: "Adrian anak yang rajin dan sangat disiplin hadir di kelas, Bapak sangat menghargai itu. Hasil ini adalah batu lompatan awal. Jangan berkecil hati ya, nak. Mari kita luangkan waktu sedikit lebih banyak untuk mengulang pelajaran Matematika, IPAS, dan Bahasa Indonesia di rumah. Kamu pasti bisa!"
+      },
+      {
+        id: 5,
+        name: "Anastasya Michelle Panjaitan",
+        nis: "2971",
+        nisn: "3159740775",
+        scores: [86, 87, 67, 65, 84, 86, 77, 84, 73, 83],
+        customTopics: {
+          0: "memahami karya Allah dalam kehidupan keluarga, sekolah, dan masyarakat.."
+        },
+        ekskul: [],
+        sakit: 0, izin: 0, alfa: 0,
+        note: "Selamat atas kehadiran 100% yang luar biasa, Anastasya! Kedisiplinanmu patut diacungi jempol. Hasil di Pendidikan Pancasila, IPAS, Musik, dan Bahasa Inggris juga sudah sangat baik. Mari kita asah lagi ketelitianmu di Matematika dan Bahasa Indonesia. Terus pancarkan semangat positifmu di kelas ya!"
+      },
+      {
+        id: 6,
+        name: "Andhara Keisha Azzahra",
+        nis: "2972",
+        nisn: "3158087122",
+        scores: [60, 77, 27, 80, 48, 73, 52, 60, 80, 97],
+        ekskul: [],
+        sakit: 0, izin: 2, alfa: 0,
+        note: "Andhara, pencapaianmu di PKLH, Koding, dan Bahasa Indonesia sungguh membuat Bapak bangga! Kamu punya potensi akademis yang besar. Yuk, kita jaga konsistensi belajar untuk Matematika dan Pendidikan Pancasila. Kalau ada materi yang membingungkan, ayo ajak teman atau guru berdiskusi bersama!"
+      },
+      {
+        id: 7,
+        name: "Anindita Putri Suci Anggraeni",
+        nis: "2973",
+        nisn: "0138435615",
+        scores: [70, 93, 93, 80, 88, 88, 71, 64, 83, 80],
+        ekskul: [],
+        sakit: 0, izin: 0, alfa: 0,
+        note: "Anindita adalah teladan dalam kedisiplinan dan kehadiran di kelas. Nilai-nilaimu di Pancasila, Bahasa Indonesia, IPAS, dan Musik sangat stabil dan memuaskan. Untuk makin menyempurnakan prestasimu, mari kita tingkatkan sedikit latihan di Matematika dan Koding. Bapak bangga padamu!"
+      },
+      {
+        id: 8,
+        name: "Anindya Aisyah Ramadhani",
+        nis: "2974",
+        nisn: "0155980019",
+        scores: [85, 97, 90, 75, 96, 86, 93, 96, 90, 97],
+        ekskul: [],
+        sakit: 4, izin: 0, alfa: 0,
+        note: "Prestasi yang amat cemerlang, Anindya! Nilai-nilaimu di Pancasila, IPAS, Bahasa Inggris, PKLH, hingga Koding sangat tinggi. Kamu anak yang cerdas dan mau belajar. Tinggal satu langkah lagi nih, mari kita perbanyak latihan Matematika agar semua nilaimu makin berkilau!"
+      },
+      {
+        id: 9,
+        name: "Aurelia Anindya Dhewi",
+        nis: "3246",
+        nisn: "0153399370",
+        scores: [75, 97, 82, 75, 92, 80, 100, 60, 100, 89],
+        ekskul: [],
+        sakit: 16, izin: 2, alfa: 0,
+        note: "Aurelia, Bapak sangat menghargai usahamu! Nilai Pancasila, PKLH, dan Bahasa Indonesia kamu sudah baik sekali, apalagi kamu sempat harus berjuang melawan sakit kemarin. Tetap utamakan kesehatanmu ya. Jangan ragu minta bimbingan Bapak jika ada materi pelajaran lain yang ingin kamu dalami."
+      },
+      {
+        id: 10,
+        name: "Azizah Dzakiyah Talita Ma'Rifatuha Al-Asach",
+        nis: "2975",
+        nisn: "3159153320",
+        scores: [75, 97, 90, 80, 56, 80, 67, 76, 73, 93],
+        ekskul: [],
+        sakit: 0, izin: 0, alfa: 0,
+        note: "Azizah yang rajin, kehadiran sempurna tanpa absen dan nilai tinggi di Pancasila, PKLH, serta Bahasa Indonesia adalah bukti kerja kerasmu. Bapak senang sekali melihat ketekunanmu. Yuk, kita pelan-pelan asah kembali latihan Matematika dan Koding agar kemampuanmu semakin hebat!"
+      },
+      {
+        id: 11,
+        name: "Azka Pramana Prasetyo",
+        nis: "2976",
+        nisn: "3158209055",
+        scores: [70, 80, 81, 55, 68, 73, 79, 48, 53, 88],
+        ekskul: [],
+        sakit: 5, izin: 2, alfa: 0,
+        note: "Azka, selamat atas hasil yang baik di PKLH! Bapak tahu kamu sedang berproses. Jangan takut salah dalam belajar ya. Mari kita coba lebih aktif bertanya di kelas dan rajin mengulang materi Matematika, Bahasa Inggris, serta Koding di rumah. Percayalah pada kemampuan dirimu sendiri!"
+      },
+      {
+        id: 12,
+        name: "Dhinda Azahra",
+        nis: "2977",
+        nisn: "3153806299",
+        scores: [75, 83, 60, 75, 80, 80, 93, 84, 93, 87],
+        ekskul: [],
+        sakit: 6, izin: 0, alfa: 0,
+        note: "Dhinda, logika berfikirmu di pelajaran Koding sangat keren! Nilai PKLH, Bahasa Inggris, dan Pancasilamu juga sangat memuaskan. Supaya makin seimbang, yuk kita beri sedikit fokus dan perhatian lebih untuk Matematika serta Bahasa Indonesia. Terus tingkatkan rasa ingin tahumu!"
+      },
+      {
+        id: 13,
+        name: "Earlyta Keisha Az-Zahra",
+        nis: "2978",
+        nisn: "3159168081",
+        scores: [90, 100, 97, 95, 100, 86, 87, 96, 80, 100],
+        ekskul: [
+          { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" },
+          { name: "Silat", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
+        ],
+        sakit: 2, izin: 1, alfa: 0,
+        note: "Luar biasa, Earlyta! Meraih nilai 100 di tiga mata pelajaran sekaligus (Pancasila, IPAS, PKLH) serta nilai memuaskan di Bahasa Indonesia dan Bahasa Inggris adalah prestasi yang sangat membanggakan. Pertahankan kerja keras ini dan teruslah rendah hati serta mau merangkul teman-temanmu di kelas ya."
+      },
+      {
+        id: 14,
+        name: "Excellin Aurellia Silviani",
+        nis: "2979",
+        nisn: "3158064776",
+        scores: [85, 93, 83, 80, 92, 80, 80, 96, 80, 100],
+        ekskul: [],
+        sakit: 5, izin: 4, alfa: 1,
+        note: "Excellin, pemahaman materimu di PKLH, Bahasa Inggris, IPAS, dan Pancasila sangat luar biasa! Kamu anak yang pintar. Bapak berpesan agar kamu lebih konsisten dalam menjaga kehadiran di sekolah ya, supaya di pelajaran Matematika dan Seni Musik kamu tidak ketinggalan dan bisa meraih nilai maksimal."
+      },
+      {
+        id: 15,
+        name: "Faza Nur Aiman",
+        nis: "2980",
+        nisn: "3155539007",
+        scores: [65, 80, 33, 45, 68, 70, 68, 60, 57, 67],
+        ekskul: [],
+        sakit: 4, izin: 3, alfa: 0,
+        note: "Faza, modal awalmu di pelajaran Pancasila, PKLH, dan IPAS sudah bagus sekali. Bapak ingin melihat Faza lebih percaya diri lagi di kelas! Yuk, kita latih ketekunan belajar di rumah, khususnya untuk Matematika dan Koding. Bapak yakin Faza mampu mencetak peningkatan besar nanti."
+      },
+      {
+        id: 16,
+        name: "Keysha Fatazeera",
+        nis: "3247",
+        nisn: "3147785931",
+        scores: [70, 73, 47, 55, 80, 86, 82, 72, 77, 93],
+        ekskul: [],
+        sakit: 5, izin: 2, alfa: 4,
+        note: "Keysha, hasil di PKLH dan Seni Musikmu sudah bagus! Kamu punya ketertarikan yang baik di bidang tersebut. Nah, agar nilai di Bahasa Indonesia dan Matematikamu ikut melonjak naik, mari usahakan untuk hadir lebih rutin di sekolah ya. Bapak selalu menantikan kehadiran dan antusiasmemu di kelas."
+      },
+      {
+        id: 17,
+        name: "Khairunnisa Salsabila",
+        nis: "2981",
+        nisn: "3151993598",
+        scores: [50, 80, 33, 40, 44, 80, 63, 36, 43, 30],
+        ekskul: [],
+        sakit: 1, izin: 0, alfa: 1,
+        note: "Nisa, Bapak sangat menghargai setiap proses dan usaha yang kamu tunjukkan di kelas. Jangan mudah menyerah ya, nak. Mari kita rapikan kembali jadwal belajar di rumah dan jangan sungkan untuk meminta bantuan Bapak atau teman jika ada materi yang belum dipahami. Langkah kecilmu hari ini adalah keberhasilan di masa depan."
+      },
+      {
+        id: 18,
+        name: "Luthfia Afiqa Salsabila",
+        nis: "2982",
+        nisn: "3164293414",
+        scores: [70, 87, 67, 80, 88, 85, 74, 48, 80, 80],
+        ekskul: [],
+        sakit: 1, izin: 2, alfa: 0,
+        note: "Luthfia, pencapaian di Pancasila, IPAS, Seni Musik, dan Koding sudah sangat baik! Kamu punya potensi yang merata. Sekarang, mari kita beri perhatian dan waktu latihan ekstra untuk Bahasa Inggris dan Bahasa Indonesia. Bapak percaya Luthfia pasti bisa meraih hasil yang lebih seimbang!"
+      },
+      {
+        id: 19,
+        name: "Muhammad Atala Berliandika",
+        nis: "2985",
+        nisn: "3151500819",
+        scores: [80, 97, 63, 65, 84, 70, 93, 32, 63, 80],
+        ekskul: [
+          { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
+        ],
+        sakit: 5, izin: 1, alfa: 2,
+        note: "Atala, daya tangkapmu pada materi Pancasila, PKLH, dan IPAS sangat cepat! Kamu anak yang cerdas. Pesan Bapak, tolong tingkatkan kedisiplinan hadir tepat waktu dan usahakan jangan absen tanpa keterangan ya. Ayo lebih fokus lagi di Koding dan Bahasa Inggris, kamu pasti bisa!"
+      },
+      {
+        id: 20,
+        name: "Muhammad Azjwar Aswwad",
+        nis: "2984",
+        nisn: "3155164903",
+        scores: [45, 57, 33, 55, 40, 75, 71, 36, 43, 53],
+        ekskul: [],
+        sakit: 3, izin: 1, alfa: 0,
+        note: "Azjwar, hasil IPAS dan Pancasilamu membuktikan kalau kamu sebenarnya bisa memahami pelajaran dengan sangat baik jika fokus. Mari kita tingkatkan lagi ketertiban belajar di rumah, serta perbanyak latihan membaca dan berhitung untuk Matematika dan Bahasa Inggris. Bapak yakin kamu bisa melesat lebih tinggi!"
+      },
+      {
+        id: 21,
+        name: "Muhammad Iskandar Muda",
+        nis: "2986",
+        nisn: "3152575925",
+        scores: [90, 100, 100, 85, 100, 80, 93, 100, 93, 100],
+        ekskul: [],
+        sakit: 2, izin: 0, alfa: 0,
+        note: "Sungguh prestasi yang sangat fenomenal, Iskandar! Meraih nilai sempurna 100 di lima mata pelajaran sekaligus (Pancasila, Bahasa Indonesia, IPAS, Bahasa Inggris, PKLH) adalah capaian yang sangat langka dan membanggakan. Pertahankan kebiasaan belajar yang luar biasa ini dan tetaplah menjadi sosok teman yang rendah hati!"
+      },
+      {
+        id: 22,
+        name: "Muhammad Yasqi",
+        nis: "2987",
+        nisn: "3156938319",
+        scores: [80, 97, 87, 70, 88, 70, 83, 44, 87, 87],
+        ekskul: [],
+        sakit: 0, izin: 1, alfa: 0,
+        note: "Yasqi, selamat atas nilai yang sangat baik di Pancasila, IPAS, Bahasa Indonesia, Koding, dan PKLH! Ditambah lagi tingkat kehadiranmu sangat rajin. Luar biasa! Sekarang tinggal memberi sedikit perhatian ekstra pada Bahasa Inggris dan Seni Musik agar prestasimu makin sempurna."
+      },
+      {
+        id: 23,
+        name: "Nurul Aqila",
+        nis: "2988",
+        nisn: "3157192404",
+        scores: [85, 93, 73, 70, 96, 80, 89, 76, 80, 93],
+        ekskul: [],
+        sakit: 6, izin: 1, alfa: 0,
+        note: "Aqila yang tekun, nilai IPAS, PKLH, dan Pancasilamu sangat membanggakan! Walau kemarin sempat terganggu karena sakit, kamu terbukti bisa mengejar pelajaran dengan cepat. Terus pertahankan semangat juang ini dan mari tingkatkan lagi ketelitian di Bahasa Indonesia dan Seni Musik."
+      },
+      {
+        id: 24,
+        name: "Pandu Djalu Wicaksono",
+        nis: "2989",
+        nisn: "3153856744",
+        scores: [80, 100, 90, 80, 76, 80, 87, 84, 73, 93],
+        ekskul: [],
+        sakit: 1, izin: 0, alfa: 0,
+        note: "Pandu, nilai 100 di Pendidikan Pancasila dan hasil bagus di PKLH serta Bahasa Indonesia adalah pencapaian yang mantap! Ditambah lagi kehadiranmu yang sangat disiplin. Yuk, kita asah lagi latihan soal-soal Matematika, IPAS, dan Koding agar nilaimu di akhir semester makin melesat hebat!"
+      },
+      {
+        id: 25,
+        name: "Reza Kurnia Bekti",
+        nis: "2991",
+        nisn: "3133341914",
+        scores: [60, 87, 57, 60, 60, 73, 90, 24, 63, 77],
+        ekskul: [],
+        sakit: 6, izin: 0, alfa: 0,
+        note: "Reza, pencapaianmu di Pancasila, PKLH, dan Seni Musik menunjukkan bahwa kamu sudah berusaha keras. Terus jaga semangatmu ya! Mari kita tingkatkan lagi porsi membaca dan latihan mandiri di rumah, terutama untuk Bahasa Inggris dan Koding. Bapak akan selalu mendukung usahamu."
+      },
+      {
+        id: 26,
+        name: "Rizky Ramadhan",
+        nis: "2992",
+        nisn: "3157826153",
+        scores: [70, 93, 93, 75, 80, 75, 95, 80, 93, 90],
+        ekskul: [],
+        sakit: 4, izin: 2, alfa: 0,
+        note: "Rizky, hasil di Pancasila, Koding, PKLH, dan Matematikamu sangat solid! Logika berfikirmu berkembang dengan sangat baik. Pertahankan fokus belajarmu ini, dan coba berikan sedikit perhatian lebih saat pembelajaran IPAS dan Seni Musik. Teruslah menjadi murid yang membanggakan!"
+      },
+      {
+        id: 27,
+        name: "Sabiq El Fathin Salim",
+        nis: "2993",
+        nisn: "3153729956",
+        scores: [75, 80, 50, 75, 88, 73, 93, 40, 67, 67],
+        ekskul: [
+          { name: "Silat", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
+        ],
+        sakit: 8, izin: 0, alfa: 0,
+        note: "Sabiq, kemampuan logikamu di Matematika dan IPAS sangat menonjol dan memuaskan! Luar biasa. Bapak berpesan agar Sabiq selalu menjaga kesehatan supaya tidak sering absen sekolah. Mari kita tingkatkan juga latihan di Bahasa Inggris dan Pendidikan Pancasila. Semangat terus, Sabiq!"
+      },
+      {
+        id: 28,
+        name: "Sandi Rama Aditia",
+        nis: "2994",
+        nisn: "3157111091",
+        scores: [85, 93, 40, 65, 96, 80, 93, 60, 67, 87],
+        ekskul: [
+          { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
+        ],
+        sakit: 4, izin: 0, alfa: 0,
+        note: "Sandi, nilai IPAS (96) dan Pancasila (93) kamu keren sekali! Pemahaman sainsmu sangat bagus. Yuk, kita imbangi dengan peningkatan fokus di pelajaran Bahasa Indonesia, Matematika, dan Bahasa Inggris. Kamu punya potensi besar, terus pacu dirimu untuk menjadi yang terbaik!"
+      },
+      {
+        id: 29,
+        name: "Syauqia Aftani Anindya",
+        nis: "2995",
+        nisn: "3154799827",
+        scores: [80, 94, 89, 70, 100, 85, 93, 68, 80, 91],
+        ekskul: [
+          { name: "Gerakan Pramuka", grade: "Sangat Baik", desc: "Ananda sangat aktif dan berprestasi dalam mengikuti kegiatan" }
+        ],
+        sakit: 4, izin: 1, alfa: 0,
+        note: "Syauqia, nilai sempurna 100 di IPAS serta hasil tinggi di Pancasila, PKLH, dan Bahasa Indonesia adalah bukti betapa bersungguh-sungguhnya kamu belajar! Luar biasa. Mari kita beri sedikit usaha dan latihan ekstra di Matematika dan Koding agar prestasimu makin lengkap."
+      },
+      {
+        id: 30,
+        name: "Tsamara Ufairah Azka",
+        nis: "2996",
+        nisn: "3151682194",
+        scores: [65, 90, 33, 80, 80, 80, 78, 60, 80, 70],
+        ekskul: [],
+        sakit: 0, izin: 0, alfa: 0,
+        note: "Tsamara, kehadiran 100% tanpa pernah alpa maupun sakit adalah pencapaian yang luar biasa! Nilai-nilaimu di Pancasila, Bahasa Indonesia, Matematika, IPAS, dan Koding juga sangat stabil dan baik. Konsistensi dan ketekunanmu adalah kunci suksesmu. Pertahankan terus sampai akhir semester ya!"
+      },
+      {
+        id: 31,
+        name: "Zhafira Kaysha",
+        nis: "2997",
+        nisn: "3152485407",
+        scores: [90, 93, 67, 70, 88, 86, 88, 92, 93, 90],
+        ekskul: [],
+        sakit: 1, izin: 4, alfa: 0,
+        note: "Zhafira, pencapaianmu sangat seimbang dan merata di hampir seluruh mata pelajaran (Koding, Pancasila, Bahasa Inggris, PKLH, dan IPAS)! Kamu anak yang serba bisa. Tinggal meningkatkan sedikit ketelitian dalam menjawab soal Matematika dan Bahasa Indonesia. Pertahankan prestasi hebatmu ini!"
+      }
+    ];
+
+    // ============================================================================
+    // STATE & LOCAL STORAGE UNTUK PASSWORD KUSTOM
+    // ============================================================================
+    const STORAGE_KEY = "sdn011_kelas5_custom_passwords_v1";
+    let customPasswords = {};
+    let currentStudent = null;
+
+    function loadCustomPasswords() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          customPasswords = JSON.parse(saved);
+        }
+      } catch (e) {
+        customPasswords = {};
+      }
+    }
+
+    function saveCustomPasswords() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(customPasswords));
+      } catch (e) {
+        // Fallback if storage is restricted
+      }
+    }
+
+    function getCustomPassword(studentId, defaultNis) {
+      return customPasswords[studentId] || defaultNis;
+    }
+
+    // Fungsi penentu predikat capaian & deskripsi sesuai aturan dokumen
+    function getCapaianDetails(score, subjectIndex, student) {
+      let predikat = "Kurang";
+      let badgeClass = "bg-rose-100 text-rose-800 border-rose-200";
+      let barClass = "bg-rose-500";
+      let isTercapai = false;
+
+      if (score === 100) {
+        predikat = "Sangat Baik";
+        badgeClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
+        barClass = "bg-emerald-500";
+        isTercapai = true;
+      } else if (score >= 96) {
+        predikat = "Baik";
+        badgeClass = "bg-blue-100 text-blue-800 border-blue-200";
+        barClass = "bg-blue-600";
+        isTercapai = true;
+      } else if (score >= 85) {
+        predikat = "Cukup";
+        badgeClass = "bg-amber-100 text-amber-800 border-amber-200";
+        barClass = "bg-amber-500";
+        isTercapai = true;
+      }
+
+      const topic = (student.customTopics && student.customTopics[subjectIndex])
+        ? student.customTopics[subjectIndex]
+        : SUBJECTS[subjectIndex].topic;
+
+      const prefix = isTercapai
+        ? "Menunjukkan ketercapaian pada "
+        : "Perlu pendampingan pada ";
+
+      return {
+        predikat,
+        badgeClass,
+        barClass,
+        isTercapai,
+        description: prefix + topic
+      };
+    }
+
+    // ============================================================================
+    // INISIALISASI HALAMAN LOGIN
+    // ============================================================================
+    function populateStudentDropdown() {
+      const selectEl = document.getElementById("studentSelect");
+      selectEl.innerHTML = "";
+
+      const defaultOpt = document.createElement("option");
+      defaultOpt.value = "";
+      defaultOpt.textContent = "-- Pilih Nama Murid --";
+      defaultOpt.disabled = true;
+      defaultOpt.selected = true;
+      selectEl.appendChild(defaultOpt);
+
+      STUDENTS_DATA.forEach((student) => {
+        const opt = document.createElement("option");
+        opt.value = student.id;
+        opt.textContent = `${student.id}. ${student.name}`;
+        selectEl.appendChild(opt);
+      });
+    }
+
+    function onStudentSelected() {
+      const errBox = document.getElementById("loginErrorBox");
+      errBox.classList.add("hidden");
+    }
+
+    function togglePasswordVisibility() {
+      const input = document.getElementById("studentPassword");
+      const icon = document.getElementById("eyeIcon");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.className = "fa-solid fa-eye-slash";
+      } else {
+        input.type = "password";
+        icon.className = "fa-solid fa-eye";
+      }
+    }
+
+    function handleStudentLogin() {
+      const selectEl = document.getElementById("studentSelect");
+      const pwdInput = document.getElementById("studentPassword");
+      const errBox = document.getElementById("loginErrorBox");
+      const errText = document.getElementById("loginErrorText");
+
+      const selectedId = selectEl.value;
+      if (!selectedId) {
+        errText.textContent = "Silakan pilih nama murid terlebih dahulu pada menu dropdown di atas.";
+        errBox.classList.remove("hidden");
+        return;
+      }
+
+      const student = STUDENTS_DATA.find(s => String(s.id) === String(selectedId));
+      const enteredPwd = pwdInput.value.trim();
+
+      if (!enteredPwd) {
+        errText.textContent = `Silakan masukkan password untuk ${student.name}.`;
+        errBox.classList.remove("hidden");
+        return;
+      }
+
+      const customPwd = getCustomPassword(student.id, student.nis);
+      const validPasswords = [
+        student.nis.toLowerCase(),
+        student.nisn.toLowerCase(),
+        `${student.nis}/${student.nisn}`.toLowerCase(),
+        customPwd.toLowerCase()
+      ];
+
+      if (validPasswords.includes(enteredPwd.toLowerCase())) {
+        errBox.classList.add("hidden");
+        pwdInput.value = "";
+        openStudentReport(student);
+      } else {
+        errText.textContent = `Password yang dimasukkan salah. Murid hanya dapat membuka rapor miliknya sendiri.`;
+        errBox.classList.remove("hidden");
+      }
+    }
+
+    // ============================================================================
+    // RENDER RAPOR MURID (INTERAKTIF & A4 RESMI)
+    // ============================================================================
+    function openStudentReport(student) {
+      currentStudent = student;
+
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("teacherSection").classList.add("hidden");
+      document.getElementById("reportSection").classList.remove("hidden");
+
+      document.getElementById("activeStudentTopLabel").textContent = `${student.name} (${student.nis}/${student.nisn})`;
+
+      // Hitung statistik
+      const totalScore = student.scores.reduce((a, b) => a + b, 0);
+      const avgScore = (totalScore / student.scores.length).toFixed(1);
+      const maxScore = Math.max(...student.scores);
+      const passedCount = student.scores.filter(s => s >= 85).length;
+      const totalAbsen = student.sakit + student.izin + student.alfa;
+
+      // Isi Header Interaktif
+      document.getElementById("interactiveName").textContent = student.name;
+      document.getElementById("interactiveNis").textContent = `${student.nis} / ${student.nisn}`;
+      document.getElementById("statAvg").textContent = avgScore;
+      document.getElementById("statMax").textContent = maxScore;
+      document.getElementById("statPassed").textContent = `${passedCount}/10`;
+      document.getElementById("statAbsence").textContent = `${totalAbsen} hr`;
+      document.getElementById("interactiveNote").textContent = `"${student.note}"`;
+
+      // Isi Tabel Nilai Interaktif & Tabel Cetak A4
+      const interactiveTbody = document.getElementById("interactiveGradesTable");
+      const printTbody = document.getElementById("printGradesTable");
+      interactiveTbody.innerHTML = "";
+      printTbody.innerHTML = "";
+
+      student.scores.forEach((score, idx) => {
+        const subj = SUBJECTS[idx];
+        const info = getCapaianDetails(score, idx, student);
+
+        // Baris Interaktif
+        const trInt = document.createElement("tr");
+        trInt.className = "hover:bg-slate-50/90 transition";
+        trInt.innerHTML = `
+          <td class="py-3.5 px-3 text-center font-bold text-slate-500">${subj.no}</td>
+          <td class="py-3.5 px-4 font-bold text-slate-800">${subj.name}</td>
+          <td class="py-3.5 px-4">
+            <div class="flex flex-col items-center">
+              <span class="text-base font-extrabold text-slate-900">${score}</span>
+              <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden mt-1 border border-slate-200/60">
+                <div class="${info.barClass} h-full rounded-full" style="width: ${score}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold border ${info.badgeClass}">
+              ${info.predikat}
+            </span>
+          </td>
+          <td class="py-3.5 px-4 text-slate-600 text-xs sm:text-sm leading-relaxed">${info.description}</td>
+        `;
+        interactiveTbody.appendChild(trInt);
+
+        // Baris Cetak A4
+        const trPrint = document.createElement("tr");
+        trPrint.innerHTML = `
+          <td class="border border-slate-800 py-1.5 px-2 text-center">${subj.no}</td>
+          <td class="border border-slate-800 py-1.5 px-2.5 font-medium">${subj.name}</td>
+          <td class="border border-slate-800 py-1.5 px-2 text-center font-bold">${score}</td>
+          <td class="border border-slate-800 py-1.5 px-2 text-center">${info.predikat}</td>
+          <td class="border border-slate-800 py-1.5 px-2.5">${info.description}</td>
+        `;
+        printTbody.appendChild(trPrint);
+      });
+
+      // Isi Ekstrakurikuler Interaktif & Cetak
+      const ekskulBox = document.getElementById("interactiveEkskulContainer");
+      const printEkskulTbody = document.getElementById("printEkskulTable");
+      if (!student.ekskul || student.ekskul.length === 0) {
+        ekskulBox.innerHTML = `
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm text-slate-500 italic">
+            Belum ada kegiatan ekstrakurikuler pada tengah semester ini.
+          </div>
+        `;
+        printEkskulTbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="border border-slate-800 py-2 px-3 text-center italic">Belum ada kegiatan</td>
+          </tr>
+        `;
+      } else {
+        ekskulBox.innerHTML = student.ekskul.map((ek, i) => `
+          <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3.5 mb-2 last:mb-0">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800 text-sm">${i + 1}. ${ek.name}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-200 text-emerald-900 font-bold text-xs">${ek.grade}</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">${ek.desc}</p>
+          </div>
+        `).join("");
+
+        printEkskulTbody.innerHTML = student.ekskul.map((ek, i) => `
+          <tr>
+            <td class="border border-slate-800 py-1.5 px-2 text-center">${i + 1}</td>
+            <td class="border border-slate-800 py-1.5 px-2">${ek.name}</td>
+            <td class="border border-slate-800 py-1.5 px-2 text-center">${ek.grade}</td>
+            <td class="border border-slate-800 py-1.5 px-2">${ek.desc}</td>
+          </tr>
+        `).join("");
+      }
+
+      // Isi Ketidakhadiran
+      document.getElementById("interactiveSakit").textContent = `${student.sakit} hari`;
+      document.getElementById("interactiveIzin").textContent = `${student.izin} hari`;
+      document.getElementById("interactiveAlfa").textContent = `${student.alfa} hari`;
+
+      // Isi Lembar Cetak A4 lainnya
+      document.getElementById("printName").textContent = `: ${student.name}`;
+      document.getElementById("printNis").textContent = `: ${student.nis}/${student.nisn}`;
+      document.getElementById("printSakit").textContent = `${student.sakit} hari`;
+      document.getElementById("printIzin").textContent = `${student.izin} hari`;
+      document.getElementById("printAlfa").textContent = `${student.alfa} hari`;
+      document.getElementById("printNote").textContent = student.note;
+
+      switchReportMode("interactive");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function switchReportMode(mode) {
+      const intView = document.getElementById("interactiveReportView");
+      const offView = document.getElementById("officialReportView");
+      const btnInt = document.getElementById("tabBtnInteractive");
+      const btnOff = document.getElementById("tabBtnOfficial");
+
+      if (mode === "official") {
+        intView.classList.add("hidden");
+        offView.classList.remove("hidden");
+        btnOff.className = "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white transition flex items-center gap-1.5";
+        btnInt.className = "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-1.5";
+      } else {
+        offView.classList.add("hidden");
+        intView.classList.remove("hidden");
+        btnInt.className = "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white transition flex items-center gap-1.5";
+        btnOff.className = "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-1.5";
+      }
+    }
+
+    function printOfficialReport() {
+      switchReportMode("official");
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+
+    function backToLogin() {
+      document.getElementById("reportSection").classList.add("hidden");
+      document.getElementById("teacherSection").classList.add("hidden");
+      document.getElementById("loginSection").classList.remove("hidden");
+      document.getElementById("studentPassword").value = "";
+      document.getElementById("loginErrorBox").classList.add("hidden");
+    }
+
+    // ============================================================================
+    // AUTENTIKASI & PANEL WALI KELAS (TERKUNCI DARI MURID)
+    // ============================================================================
+    function openTeacherAuthModal() {
+      const modal = document.getElementById("teacherAuthModal");
+      const input = document.getElementById("teacherPinInput");
+      const err = document.getElementById("teacherAuthError");
+      input.value = "";
+      err.classList.add("hidden");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      setTimeout(() => input.focus(), 100);
+    }
+
+    function closeTeacherAuthModal() {
+      const modal = document.getElementById("teacherAuthModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function verifyTeacherAuth() {
+      const input = document.getElementById("teacherPinInput");
+      const err = document.getElementById("teacherAuthError");
+      const val = input.value.trim();
+
+      // Wali Kelas dapat login dengan NIP lengkap (199602022022211001) atau kode guru (guru011)
+      if (val === "199602022022211001" || val.toLowerCase() === "guru011") {
+        closeTeacherAuthModal();
+        openTeacherModal();
+      } else {
+        err.classList.remove("hidden");
+      }
+    }
+
+    function openTeacherModal() {
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("reportSection").classList.add("hidden");
+      document.getElementById("teacherSection").classList.remove("hidden");
+      renderTeacherTable(document.getElementById("teacherSearchInput").value);
+    }
+
+    function renderTeacherTable(query = "") {
+      const tbody = document.getElementById("teacherStudentTableBody");
+      const q = query.trim().toLowerCase();
+      const filtered = STUDENTS_DATA.filter(s =>
+        s.name.toLowerCase().includes(q) || s.nis.includes(q) || s.nisn.includes(q)
+      );
+
+      tbody.innerHTML = filtered.map(s => {
+        const avg = (s.scores.reduce((a, b) => a + b, 0) / s.scores.length).toFixed(1);
+        const customPwd = getCustomPassword(s.id, s.nis);
+        return `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-3 px-3 text-center font-semibold text-slate-500">${s.id}</td>
+            <td class="py-3 px-4 font-bold text-slate-800">${s.name}</td>
+            <td class="py-3 px-3 text-center">
+              <span class="font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200 px-2 py-1 rounded-lg text-xs">${s.nis}</span>
+            </td>
+            <td class="py-3 px-3 text-center">
+              <span class="font-mono text-slate-600 text-xs">${s.nisn}</span>
+            </td>
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  id="pwdInput_${s.id}"
+                  value="${customPwd}"
+                  class="w-28 px-2.5 py-1 text-xs font-mono border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  onclick="saveSinglePassword(${s.id})"
+                  class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg transition"
+                  title="Simpan Password"
+                >
+                  Simpan
+                </button>
+              </div>
+            </td>
+            <td class="py-3 px-3 text-center font-extrabold text-slate-800">${avg}</td>
+            <td class="py-3 px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button
+                  onclick="copySingleStudentWA(${s.id})"
+                  class="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition"
+                  title="Salin Pesan WA untuk Orang Tua"
+                >
+                  <i class="fa-brands fa-whatsapp"></i> WA
+                </button>
+                <button
+                  onclick="openStudentReportById(${s.id})"
+                  class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition"
+                >
+                  Lihat Rapor
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function saveSinglePassword(studentId) {
+      const inputEl = document.getElementById(`pwdInput_${studentId}`);
+      if (!inputEl) return;
+      const val = inputEl.value.trim();
+      if (!val) return;
+      customPasswords[studentId] = val;
+      saveCustomPasswords();
+      showToast("Password murid berhasil diperbarui!");
+    }
+
+    function resetAllPasswordsToNis() {
+      customPasswords = {};
+      saveCustomPasswords();
+      renderTeacherTable(document.getElementById("teacherSearchInput").value);
+      showToast("Semua password dikembalikan ke NIS masing-masing.");
+    }
+
+    function openStudentReportById(studentId) {
+      const student = STUDENTS_DATA.find(s => s.id === studentId);
+      if (student) {
+        openStudentReport(student);
+      }
+    }
+
+    function copyTextToClipboard(text, message) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      showToast(message);
+    }
+
+    function copySingleStudentWA(studentId) {
+      const s = STUDENTS_DATA.find(st => st.id === studentId);
+      if (!s) return;
+      const pwd = getCustomPassword(s.id, s.nis);
+      const text = `*INFORMASI AKSES E-RAPOR TENGAH SEMESTER*\n*SDN 011 Balikpapan Tengah - Kelas 5*\n\nYth. Orang Tua/Wali dari:\nNama Murid: *${s.name}*\nPassword Login: *${pwd}* (atau NISN: *${s.nisn}*)\n\nSilakan pilih nama ananda pada aplikasi dan masukkan password di atas untuk melihat Laporan Hasil Belajar Asesmen Tengah Semester Ganjil 2026/2027.\n\nTerima kasih.\n_Wali Kelas 5: Abdul Rahmat, S.Pd._`;
+      copyTextToClipboard(text, `Pesan WA untuk ${s.name} berhasil disalin!`);
+    }
+
+    function copyAllCredentialsWA() {
+      let lines = [
+        "*DAFTAR PASSWORD E-RAPOR ASTS KELAS 5*",
+        "*SDN 011 BALIKPAPAN TENGAH (2026/2027)*",
+        ""
+      ];
+      STUDENTS_DATA.forEach(s => {
+        const pwd = getCustomPassword(s.id, s.nis);
+        lines.push(`${s.id}. *${s.name}* — Password: \`${pwd}\``);
+      });
+      copyTextToClipboard(lines.join("\n"), "Daftar login seluruh murid berhasil disalin!");
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById("toastBox");
+      const text = document.getElementById("toastText");
+      text.textContent = msg;
+      box.classList.remove("hidden");
+      box.classList.add("flex");
+      setTimeout(() => {
+        box.classList.add("hidden");
+        box.classList.remove("flex");
+      }, 3000);
+    }
+
+    // Jalankan saat halaman dimuat
+    window.onload = function () {
+      loadCustomPasswords();
+      populateStudentDropdown();
+    };
+  </script>
+</body>
+</html>
